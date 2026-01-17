@@ -1,0 +1,616 @@
+/* ============================================
+   LUMINOUS knowledge base - Admin Stylesheet
+   ============================================ */
+
+/* --------------------------------------------
+   CSS Variables
+-------------------------------------------- */
+:root {
+  /* Colors */
+  --color-primary: #1a1a2e;
+  --color-secondary: #16213e;
+  --color-accent: #FF6B81;
+  --color-accent-hover: #ff8a9b;
+  --color-success: #4CAF50;
+  --color-danger: #f44336;
+  --color-warning: #ff9800;
+  --color-bg: #F5F5F5;
+  --color-bg-secondary: #FFFFFF;
+  --color-text: #1a1a2e;
+  --color-text-muted: #666666;
+  --color-border: #e0e0e0;
+
+  /* Typography */
+  --font-family: 'Noto Sans JP', sans-serif;
+  --font-size-base: 16px;
+  --font-weight-normal: 400;
+  --font-weight-bold: 700;
+  --line-height: 1.6;
+
+  /* Spacing */
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 1.5rem;
+  --spacing-lg: 2rem;
+  --spacing-xl: 3rem;
+
+  /* Visual */
+  --radius: 8px;
+  --radius-lg: 12px;
+  --shadow: 0 2px 8px rgba(0,0,0,0.1);
+  --shadow-lg: 0 4px 16px rgba(0,0,0,0.15);
+
+  /* Transition */
+  --transition: 0.3s ease;
+}
+
+/* --------------------------------------------
+   Reset & Base
+-------------------------------------------- */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: var(--font-size-base);
+}
+
+body {
+  font-family: var(--font-family);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height);
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  min-height: 100vh;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* --------------------------------------------
+   Admin Auth Screen
+-------------------------------------------- */
+.admin-auth {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.admin-auth.fade-out {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.auth-container {
+  text-align: center;
+  padding: var(--spacing-lg);
+}
+
+.auth-icon {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto var(--spacing-md);
+  background: rgba(255,255,255,0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  color: var(--color-accent);
+}
+
+.auth-title {
+  font-size: 1.75rem;
+  font-weight: var(--font-weight-bold);
+  color: #fff;
+  margin-bottom: var(--spacing-xs);
+}
+
+.auth-subtitle {
+  font-size: 0.875rem;
+  color: rgba(255,255,255,0.6);
+  margin-bottom: var(--spacing-lg);
+}
+
+.auth-form {
+  max-width: 320px;
+  margin: 0 auto;
+}
+
+.auth-input {
+  width: 100%;
+  padding: 14px 18px;
+  font-size: 1rem;
+  font-family: inherit;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: var(--radius);
+  color: #fff;
+  outline: none;
+  transition: var(--transition);
+}
+
+.auth-input::placeholder {
+  color: rgba(255,255,255,0.5);
+}
+
+.auth-input:focus {
+  border-color: var(--color-accent);
+  background: rgba(255,255,255,0.15);
+}
+
+.auth-button {
+  width: 100%;
+  padding: 14px 18px;
+  margin-top: var(--spacing-sm);
+  font-size: 1rem;
+  font-weight: var(--font-weight-bold);
+  color: #fff;
+  background: var(--color-accent);
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.auth-button:hover {
+  background: var(--color-accent-hover);
+}
+
+.auth-error {
+  margin-top: var(--spacing-sm);
+  color: var(--color-accent);
+  font-size: 0.875rem;
+  min-height: 1.5em;
+}
+
+/* --------------------------------------------
+   Admin Header
+-------------------------------------------- */
+.admin-header {
+  background: var(--color-primary);
+  color: #fff;
+  padding: var(--spacing-md) 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: var(--shadow);
+}
+
+.admin-header .header-inner {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+}
+
+.header-title {
+  font-size: 1.25rem;
+  font-weight: var(--font-weight-bold);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+.header-actions {
+  display: flex;
+  gap: var(--spacing-xs);
+}
+
+/* --------------------------------------------
+   Buttons
+-------------------------------------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 16px;
+  font-size: 0.875rem;
+  font-weight: var(--font-weight-bold);
+  font-family: inherit;
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: var(--transition);
+  text-decoration: none;
+}
+
+.btn-primary {
+  background: var(--color-primary);
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: var(--color-secondary);
+}
+
+.btn-accent {
+  background: var(--color-accent);
+  color: #fff;
+}
+
+.btn-accent:hover {
+  background: var(--color-accent-hover);
+}
+
+.btn-outline {
+  background: transparent;
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.3);
+}
+
+.btn-outline:hover {
+  background: rgba(255,255,255,0.1);
+}
+
+.btn-danger {
+  background: var(--color-danger);
+  color: #fff;
+}
+
+.btn-danger:hover {
+  background: #d32f2f;
+}
+
+.btn-small {
+  padding: 6px 12px;
+  font-size: 0.75rem;
+}
+
+/* --------------------------------------------
+   Admin Main
+-------------------------------------------- */
+.admin-main {
+  padding: var(--spacing-xl) 0;
+  min-height: calc(100vh - 200px);
+}
+
+/* --------------------------------------------
+   Admin Section
+-------------------------------------------- */
+.admin-section {
+  margin-bottom: var(--spacing-xl);
+}
+
+.section-title {
+  font-size: 1.25rem;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
+  margin-bottom: var(--spacing-md);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+.section-title i {
+  color: var(--color-accent);
+}
+
+/* --------------------------------------------
+   Cards
+-------------------------------------------- */
+.cards-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-md);
+}
+
+@media (min-width: 768px) {
+  .cards-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.admin-card {
+  background: var(--color-bg-secondary);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.admin-card.full-width {
+  grid-column: 1 / -1;
+}
+
+.card-header {
+  padding: var(--spacing-md);
+  background: var(--color-bg);
+  border-bottom: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-sm);
+}
+
+.card-header h3 {
+  font-size: 1rem;
+  font-weight: var(--font-weight-bold);
+}
+
+.card-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  margin-right: var(--spacing-xs);
+}
+
+.card-icon.member {
+  background: var(--color-primary);
+}
+
+.card-icon.admin {
+  background: var(--color-accent);
+}
+
+.card-body {
+  padding: var(--spacing-md);
+}
+
+/* --------------------------------------------
+   Password Display & Form
+-------------------------------------------- */
+.password-display {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  margin-bottom: var(--spacing-md);
+}
+
+.password-field {
+  flex: 1;
+  padding: 12px 14px;
+  font-size: 1rem;
+  font-family: monospace;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  color: var(--color-text);
+}
+
+.toggle-visibility {
+  width: 44px;
+  height: 44px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  color: var(--color-text-muted);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.toggle-visibility:hover {
+  background: var(--color-primary);
+  color: #fff;
+  border-color: var(--color-primary);
+}
+
+.password-form {
+  display: flex;
+  gap: var(--spacing-xs);
+}
+
+.input-field {
+  flex: 1;
+  padding: 12px 14px;
+  font-size: 1rem;
+  font-family: inherit;
+  background: #fff;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  color: var(--color-text);
+  outline: none;
+  transition: var(--transition);
+}
+
+.input-field:focus {
+  border-color: var(--color-accent);
+}
+
+/* --------------------------------------------
+   Memo
+-------------------------------------------- */
+.memo-field {
+  width: 100%;
+  padding: var(--spacing-sm);
+  font-size: 1rem;
+  font-family: inherit;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  color: var(--color-text);
+  resize: vertical;
+  outline: none;
+  transition: var(--transition);
+}
+
+.memo-field:focus {
+  border-color: var(--color-accent);
+}
+
+.memo-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: var(--spacing-sm);
+}
+
+.memo-status {
+  font-size: 0.875rem;
+  color: var(--color-success);
+}
+
+/* --------------------------------------------
+   History
+-------------------------------------------- */
+.history-list {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.history-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm);
+  background: var(--color-bg);
+  border-radius: var(--radius);
+  margin-bottom: var(--spacing-xs);
+}
+
+.history-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  flex-shrink: 0;
+}
+
+.history-icon.member {
+  background: var(--color-primary);
+  color: #fff;
+}
+
+.history-icon.admin {
+  background: var(--color-accent);
+  color: #fff;
+}
+
+.history-content {
+  flex: 1;
+}
+
+.history-title {
+  font-size: 0.875rem;
+  font-weight: var(--font-weight-bold);
+  margin-bottom: 2px;
+}
+
+.history-date {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+.no-history {
+  text-align: center;
+  color: var(--color-text-muted);
+  padding: var(--spacing-lg);
+}
+
+/* --------------------------------------------
+   Help Content
+-------------------------------------------- */
+.help-content h4 {
+  font-size: 1rem;
+  font-weight: var(--font-weight-bold);
+  margin-bottom: var(--spacing-xs);
+  margin-top: var(--spacing-md);
+}
+
+.help-content h4:first-child {
+  margin-top: 0;
+}
+
+.help-content ul {
+  list-style: disc;
+  padding-left: 1.5rem;
+  margin-bottom: var(--spacing-sm);
+}
+
+.help-content li {
+  margin-bottom: 4px;
+  color: var(--color-text-muted);
+}
+
+.help-content code {
+  background: var(--color-bg);
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-family: monospace;
+  color: var(--color-accent);
+}
+
+/* --------------------------------------------
+   Footer
+-------------------------------------------- */
+.admin-footer {
+  padding: var(--spacing-lg) 0;
+  background: var(--color-primary);
+  text-align: center;
+}
+
+.admin-footer p {
+  font-size: 0.875rem;
+  color: rgba(255,255,255,0.5);
+}
+
+/* --------------------------------------------
+   Toast
+-------------------------------------------- */
+.toast {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background: var(--color-primary);
+  color: #fff;
+  padding: 14px 24px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+  opacity: 0;
+  visibility: hidden;
+  transition: var(--transition);
+  z-index: 9999;
+}
+
+.toast.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+  visibility: visible;
+}
+
+.toast.success {
+  background: var(--color-success);
+}
+
+.toast.error {
+  background: var(--color-danger);
+}
+
+/* --------------------------------------------
+   Animations
+-------------------------------------------- */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-10px); }
+  75% { transform: translateX(10px); }
+}

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Admin - LUMINOUS knowledge base</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+  <!-- ============================================
+       管理者認証画面
+  ============================================= -->
+  <div id="admin-auth" class="admin-auth">
+    <div class="auth-container">
+      <div class="auth-icon">
+        <i class="fas fa-user-shield"></i>
+      </div>
+      <h1 class="auth-title">Admin Login</h1>
+      <p class="auth-subtitle">LUMINOUS knowledge base</p>
+      <form id="admin-auth-form" class="auth-form">
+        <input
+          type="password"
+          id="admin-password-input"
+          class="auth-input"
+          placeholder="管理者パスワード"
+          autocomplete="off"
+          required
+        >
+        <button type="submit" class="auth-button">
+          <i class="fas fa-sign-in-alt"></i> ログイン
+        </button>
+        <p id="admin-auth-error" class="auth-error"></p>
+      </form>
+    </div>
+  </div>
+
+  <!-- ============================================
+       管理者ダッシュボード
+  ============================================= -->
+  <div id="admin-dashboard" class="admin-dashboard hidden">
+
+    <!-- ヘッダー -->
+    <header class="admin-header">
+      <div class="header-inner">
+        <h1 class="header-title">
+          <i class="fas fa-cog"></i> 管理者ダッシュボード
+        </h1>
+        <div class="header-actions">
+          <a href="index.html" class="btn btn-outline">
+            <i class="fas fa-home"></i> サイトへ
+          </a>
+          <button id="admin-logout" class="btn btn-outline">
+            <i class="fas fa-sign-out-alt"></i> ログアウト
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- メインコンテンツ -->
+    <main class="admin-main">
+      <div class="container">
+
+        <!-- パスワード管理セクション -->
+        <section class="admin-section">
+          <h2 class="section-title">
+            <i class="fas fa-key"></i> パスワード管理
+          </h2>
+
+          <div class="cards-row">
+            <!-- メンバーパスワード -->
+            <div class="admin-card">
+              <div class="card-header">
+                <span class="card-icon member"><i class="fas fa-users"></i></span>
+                <h3>メンバー用パスワード</h3>
+              </div>
+              <div class="card-body">
+                <div class="password-display">
+                  <input type="password" id="member-password-display" class="password-field" readonly>
+                  <button class="toggle-visibility" data-target="member-password-display">
+                    <i class="fas fa-eye"></i>
+                  </button>
+                </div>
+                <form id="member-password-form" class="password-form">
+                  <input
+                    type="text"
+                    id="new-member-password"
+                    class="input-field"
+                    placeholder="新しいパスワード"
+                    required
+                    minlength="4"
+                  >
+                  <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-save"></i> 更新
+                  </button>
+                </form>
+              </div>
+            </div>
+
+            <!-- 管理者パスワード -->
+            <div class="admin-card">
+              <div class="card-header">
+                <span class="card-icon admin"><i class="fas fa-user-shield"></i></span>
+                <h3>管理者パスワード</h3>
+              </div>
+              <div class="card-body">
+                <div class="password-display">
+                  <input type="password" id="admin-password-display" class="password-field" readonly>
+                  <button class="toggle-visibility" data-target="admin-password-display">
+                    <i class="fas fa-eye"></i>
+                  </button>
+                </div>
+                <form id="admin-password-form" class="password-form">
+                  <input
+                    type="text"
+                    id="new-admin-password"
+                    class="input-field"
+                    placeholder="新しいパスワード"
+                    required
+                    minlength="4"
+                  >
+                  <button type="submit" class="btn btn-accent">
+                    <i class="fas fa-save"></i> 更新
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- メモセクション -->
+        <section class="admin-section">
+          <h2 class="section-title">
+            <i class="fas fa-sticky-note"></i> 管理メモ
+          </h2>
+
+          <div class="admin-card full-width">
+            <div class="card-body">
+              <textarea
+                id="admin-memo"
+                class="memo-field"
+                placeholder="パスワード共有先、更新予定日、その他メモを記入..."
+                rows="5"
+              ></textarea>
+              <div class="memo-actions">
+                <span id="memo-status" class="memo-status"></span>
+                <button id="save-memo" class="btn btn-primary">
+                  <i class="fas fa-save"></i> メモを保存
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 変更履歴セクション -->
+        <section class="admin-section">
+          <h2 class="section-title">
+            <i class="fas fa-history"></i> 変更履歴
+          </h2>
+
+          <div class="admin-card full-width">
+            <div class="card-header">
+              <h3>パスワード変更ログ</h3>
+              <button id="clear-history" class="btn btn-small btn-danger">
+                <i class="fas fa-trash"></i> 履歴クリア
+              </button>
+            </div>
+            <div class="card-body">
+              <div id="history-list" class="history-list">
+                <!-- 履歴がここに表示される -->
+              </div>
+              <p id="no-history" class="no-history">変更履歴はありません</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- 初期設定セクション -->
+        <section class="admin-section">
+          <h2 class="section-title">
+            <i class="fas fa-info-circle"></i> 初期設定・ヘルプ
+          </h2>
+
+          <div class="admin-card full-width">
+            <div class="card-body">
+              <div class="help-content">
+                <h4>📌 初期パスワード</h4>
+                <ul>
+                  <li>メンバー用: <code>luminous2025</code></li>
+                  <li>管理者用: <code>admin2025</code></li>
+                </ul>
+
+                <h4>📌 パスワード変更について</h4>
+                <ul>
+                  <li>変更はブラウザのLocalStorageに保存されます</li>
+                  <li>異なるブラウザ/デバイスでは別々に設定が必要です</li>
+                  <li>メンバーには新パスワードを別途共有してください</li>
+                </ul>
+
+                <h4>📌 初期状態にリセット</h4>
+                <button id="reset-all" class="btn btn-danger">
+                  <i class="fas fa-undo"></i> 全てリセット（初期状態に戻す）
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+
+    <!-- フッター -->
+    <footer class="admin-footer">
+      <p>&copy; 2025 LUMINOUS knowledge base - Admin Panel</p>
+    </footer>
+
+  </div>
+
+  <!-- Toast通知 -->
+  <div id="toast" class="toast">
+    <span id="toast-message"></span>
+  </div>
+
+  <!-- Script -->
+  <script src="admin.js"></script>
+</body>
+</html>

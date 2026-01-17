@@ -3,9 +3,17 @@
    ============================================ */
 
 // ============================================
-// パスワード設定（ここを変更してパスワードを更新）
+// パスワード設定
+// ※管理者ページから変更可能（LocalStorageに保存）
+// ※LocalStorageにない場合はこの初期値を使用
 // ============================================
-const SITE_PASSWORD = 'luminous2025';  // ← パスワードをここで変更
+const DEFAULT_PASSWORD = 'luminous2025';
+const STORAGE_KEY = 'luminous_member_password';
+
+// パスワードを取得（LocalStorage優先）
+function getSitePassword() {
+  return localStorage.getItem(STORAGE_KEY) || DEFAULT_PASSWORD;
+}
 
 
 // ============================================
@@ -46,8 +54,9 @@ authForm.addEventListener('submit', (e) => {
   e.preventDefault();
 
   const enteredPassword = passwordInput.value;
+  const correctPassword = getSitePassword();
 
-  if (enteredPassword === SITE_PASSWORD) {
+  if (enteredPassword === correctPassword) {
     // Success
     sessionStorage.setItem('authenticated', 'true');
     authScreen.classList.add('fade-out');
