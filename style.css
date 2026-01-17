@@ -648,15 +648,18 @@ img {
   margin-top: var(--spacing-lg);
   padding: 10px 20px;
   font-size: 0.875rem;
-  color: rgba(255,255,255,0.4);
+  color: rgba(255,255,255,0.8);
   background: transparent;
-  border: none;
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: var(--radius);
   cursor: pointer;
   transition: var(--transition-fast);
 }
 
 .admin-login-link:hover {
-  color: var(--color-accent);
+  color: #fff;
+  background: var(--color-accent);
+  border-color: var(--color-accent);
 }
 
 .admin-login-link i {

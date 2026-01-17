@@ -88,33 +88,8 @@ window.addEventListener('load', () => {
 // Admin Mode Toggle
 // ============================================
 adminLoginToggle.addEventListener('click', () => {
-  isAdminMode = !isAdminMode;
-
-  if (isAdminMode) {
-    authForm.classList.add('admin-mode');
-    passwordInput.placeholder = '管理者パスワードを入力';
-    adminLoginToggle.innerHTML = '<i class="fas fa-users"></i> メンバーログイン';
-
-    // Add admin mode label
-    if (!document.querySelector('.admin-mode-label')) {
-      const label = document.createElement('span');
-      label.className = 'admin-mode-label';
-      label.textContent = '管理者モード';
-      authForm.insertBefore(label, authForm.firstChild);
-    }
-  } else {
-    authForm.classList.remove('admin-mode');
-    passwordInput.placeholder = 'パスワードを入力';
-    adminLoginToggle.innerHTML = '<i class="fas fa-user-shield"></i> 管理者ログイン';
-
-    // Remove admin mode label
-    const label = document.querySelector('.admin-mode-label');
-    if (label) label.remove();
-  }
-
-  passwordInput.value = '';
-  authError.textContent = '';
-  passwordInput.focus();
+  // 管理者ログインページへ遷移
+  window.location.href = 'admin.html';
 });
 
 
