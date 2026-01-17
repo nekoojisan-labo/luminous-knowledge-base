@@ -183,6 +183,28 @@ body {
   min-height: 1.5em;
 }
 
+.back-to-site {
+  display: inline-block;
+  margin-top: var(--spacing-lg);
+  padding: 10px 20px;
+  font-size: 0.875rem;
+  color: rgba(255,255,255,0.8);
+  text-decoration: none;
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: var(--radius);
+  transition: var(--transition);
+}
+
+.back-to-site:hover {
+  color: #fff;
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+.back-to-site i {
+  margin-right: 6px;
+}
+
 /* --------------------------------------------
    Admin Header
 -------------------------------------------- */
