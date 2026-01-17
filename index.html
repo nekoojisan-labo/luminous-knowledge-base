@@ -52,6 +52,10 @@
         </button>
         <p id="auth-error" class="auth-error"></p>
       </form>
+      <!-- 管理者ログインリンク -->
+      <button id="admin-login-toggle" class="admin-login-link">
+        <i class="fas fa-user-shield"></i> 管理者ログイン
+      </button>
     </div>
   </div>
 
@@ -65,6 +69,10 @@
       <div class="header-inner">
         <a href="#" class="logo">LUMINOUS</a>
         <nav class="nav">
+          <!-- 管理者モード時のみ表示 -->
+          <button id="admin-panel-btn" class="admin-panel-btn hidden">
+            <i class="fas fa-cog"></i> 管理者メニュー
+          </button>
           <button id="logout-btn" class="logout-btn">
             <i class="fas fa-sign-out-alt"></i> Logout
           </button>
@@ -79,6 +87,9 @@
 
     <!-- モバイルメニュー -->
     <div id="mobile-menu" class="mobile-menu">
+      <button id="mobile-admin-panel-btn" class="mobile-admin-panel-btn hidden">
+        <i class="fas fa-cog"></i> 管理者メニュー
+      </button>
       <button id="mobile-logout-btn" class="mobile-logout-btn">
         <i class="fas fa-sign-out-alt"></i> Logout
       </button>
@@ -120,13 +131,6 @@
                 <h3 class="card-title">コンテンツ2</h3>
                 <p class="card-desc">説明文をここに入力</p>
               </a>
-              <!-- 追加用テンプレート（コピーして使用）
-              <a href="リンクURL" class="card">
-                <div class="card-icon"><i class="fas fa-file-alt"></i></div>
-                <h3 class="card-title">タイトル</h3>
-                <p class="card-desc">説明文</p>
-              </a>
-              -->
             </div>
           </div>
         </div>
@@ -140,13 +144,11 @@
           </button>
           <div class="room-content">
             <div class="cards-grid">
-              <!-- カード1 -->
               <a href="#" class="card">
                 <div class="card-icon"><i class="fas fa-file-alt"></i></div>
                 <h3 class="card-title">コンテンツ1</h3>
                 <p class="card-desc">説明文をここに入力</p>
               </a>
-              <!-- カード2 -->
               <a href="#" class="card">
                 <div class="card-icon"><i class="fas fa-video"></i></div>
                 <h3 class="card-title">コンテンツ2</h3>
@@ -165,13 +167,11 @@
           </button>
           <div class="room-content">
             <div class="cards-grid">
-              <!-- カード1 -->
               <a href="#" class="card">
                 <div class="card-icon"><i class="fas fa-file-alt"></i></div>
                 <h3 class="card-title">コンテンツ1</h3>
                 <p class="card-desc">説明文をここに入力</p>
               </a>
-              <!-- カード2 -->
               <a href="#" class="card">
                 <div class="card-icon"><i class="fas fa-video"></i></div>
                 <h3 class="card-title">コンテンツ2</h3>
@@ -190,13 +190,11 @@
           </button>
           <div class="room-content">
             <div class="cards-grid">
-              <!-- GPTカード1 -->
               <a href="https://chat.openai.com/g/xxxxx" target="_blank" rel="noopener noreferrer" class="card">
                 <div class="card-icon"><i class="fas fa-external-link-alt"></i></div>
                 <h3 class="card-title">GPT名1</h3>
                 <p class="card-desc">GPTの説明文</p>
               </a>
-              <!-- GPTカード2 -->
               <a href="https://chat.openai.com/g/xxxxx" target="_blank" rel="noopener noreferrer" class="card">
                 <div class="card-icon"><i class="fas fa-external-link-alt"></i></div>
                 <h3 class="card-title">GPT名2</h3>
@@ -214,6 +212,83 @@
       <p>&copy; 2025 LUMINOUS knowledge base. All rights reserved.</p>
     </footer>
 
+  </div>
+
+  <!-- ============================================
+       管理者パネル（モーダル）
+  ============================================= -->
+  <div id="admin-panel" class="admin-panel hidden">
+    <div class="admin-panel-overlay"></div>
+    <div class="admin-panel-content">
+      <div class="admin-panel-header">
+        <h2><i class="fas fa-user-shield"></i> 管理者メニュー</h2>
+        <button id="admin-panel-close" class="admin-panel-close">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="admin-panel-body">
+
+        <!-- パスワード管理 -->
+        <div class="admin-section">
+          <h3><i class="fas fa-key"></i> パスワード管理</h3>
+
+          <!-- メンバーパスワード -->
+          <div class="password-box">
+            <label>メンバー用パスワード</label>
+            <div class="password-display">
+              <input type="password" id="member-pw-display" class="password-field" readonly>
+              <button class="toggle-pw-btn" data-target="member-pw-display">
+                <i class="fas fa-eye"></i>
+              </button>
+            </div>
+            <form id="member-pw-form" class="password-form">
+              <input type="text" id="new-member-pw" class="input-field" placeholder="新しいパスワード" required minlength="4">
+              <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i></button>
+            </form>
+          </div>
+
+          <!-- 管理者パスワード -->
+          <div class="password-box">
+            <label>管理者パスワード</label>
+            <div class="password-display">
+              <input type="password" id="admin-pw-display" class="password-field" readonly>
+              <button class="toggle-pw-btn" data-target="admin-pw-display">
+                <i class="fas fa-eye"></i>
+              </button>
+            </div>
+            <form id="admin-pw-form" class="password-form">
+              <input type="text" id="new-admin-pw" class="input-field" placeholder="新しいパスワード" required minlength="4">
+              <button type="submit" class="btn btn-accent"><i class="fas fa-save"></i></button>
+            </form>
+          </div>
+        </div>
+
+        <!-- メモ -->
+        <div class="admin-section">
+          <h3><i class="fas fa-sticky-note"></i> 管理メモ</h3>
+          <textarea id="admin-memo" class="memo-field" placeholder="メモを入力..." rows="4"></textarea>
+          <button id="save-memo-btn" class="btn btn-primary btn-full">
+            <i class="fas fa-save"></i> メモを保存
+          </button>
+        </div>
+
+        <!-- 変更履歴 -->
+        <div class="admin-section">
+          <h3><i class="fas fa-history"></i> 変更履歴</h3>
+          <div id="history-list" class="history-list"></div>
+          <p id="no-history" class="no-history">変更履歴はありません</p>
+          <button id="clear-history-btn" class="btn btn-danger btn-small">
+            <i class="fas fa-trash"></i> 履歴クリア
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast通知 -->
+  <div id="toast" class="toast">
+    <span id="toast-message"></span>
   </div>
 
   <!-- GSAP -->
